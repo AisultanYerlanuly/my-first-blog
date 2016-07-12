@@ -3,12 +3,27 @@
 {% block content %}
     <div class="post">
         {% if post.published_date %}
-            <div class="date">
+            <div class="date" >
                 {{ post.published_date }}
             </div>
         {% endif %}
+        <span id='index_post' style="display:none">{{ post.pk }}</span>
         <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
+        <h1> сomments </h1>
+        <div id="comments_content">
+          {% for comment in post.commentss.all %}
+              <p> <b>{{ comment.author }}</b>:      {{ comment.text }} </p>
+
+          {% endfor %}
+        </div>
+
+    <form method="POST" class="post-form" id='comment'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" id = "search" class="save btn btn-default">Save</button>
+    </form>
+
     </div>
 {% endblock %}
