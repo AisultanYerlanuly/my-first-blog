@@ -18,7 +18,7 @@ def post_detail(request, pk):
             comment.post = post
             comment.published_date = timezone.now()
             comment.save()
-            return render(request, 'blog/post_detail.html', {'post': post, 'form': form})
+            return redirect('blog.views.post_detail', pk=post.pk)
     else:
         form = CommentsForm()
     return render(request, 'blog/post_detail.html', {'post': post, 'form': form})

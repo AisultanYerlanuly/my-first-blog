@@ -14,13 +14,12 @@
         <h1> сomments </h1>
         <div id="comments_content">
           {% for comment in post.commentss.all %}
-              <p> <b>{{ comment.author }}</b>:      {{ comment.text }} </p>
+              <p><b>{{ comment.author }}</b>:      {{ comment.text }}</p>
 
           {% endfor %}
         </div>
 
-    <form method="POST" class="post-form" id='comment'>
-        {% csrf_token %}
+    <form method="POST" class="post-form" id='comment'>{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" id = "search" class="save btn btn-default">Save</button>
     </form>

@@ -2,13 +2,12 @@
   <html>
       <head>
           <title>Django Girls blog</title>
-
           <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
           <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
           <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
           <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+          <script src="https://www.google.com/recaptcha/api.js" async defer></script>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-          <script src="ajax.js"></script>
       </head>
       <body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -35,19 +34,18 @@
             var author = $('#id_author').val()
             var text =$('#id_text').val()
             var data_l="<p><b>"+String(author)+"</b>: "+String(text)+"</p>"
-            $.ajax({
-              type:'POST',
-              data:str,
-              success:function(html){
-                $('#comments_content').html(content+data_l);
-
-
-              }
-
-
-            })
+            if ((author != '')&&(text != '')){
+              $.ajax({
+                type:'POST',
+                data:str,
+                success:function(html){
+                  $('#comments_content').html(content+data_l);
+                  $('#id_author').val('');
+                  $('#id_text').val('');
+                }
+              })
+            }
             return false;
-
           })
        })
        </script>
