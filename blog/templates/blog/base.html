@@ -34,16 +34,30 @@
             var author = $('#id_author').val()
             var text =$('#id_text').val()
             var data_l="<p><b>"+String(author)+"</b>: "+String(text)+"</p>"
+            var count = $('#count').html()
+
             if ((author != '')&&(text != '')){
+              move()
               $.ajax({
                 type:'POST',
                 data:str,
                 success:function(html){
+                  $('#count').html(parseInt(count)+1);
                   $('#comments_content').html(content+data_l);
                   $('#id_author').val('');
                   $('#id_text').val('');
                 }
               })
+            }
+            if (author==''){
+              $('#id_author').attr('style','border:1px solid red');
+            }else{
+              $('#id_author').attr('style','border: 1px initial #333');
+            }
+            if (text==''){
+              $('#id_text').attr('style','border:1px solid red');
+            }else{
+              $('#id_text').attr('style','border: 1px initial #333');
             }
             return false;
           })

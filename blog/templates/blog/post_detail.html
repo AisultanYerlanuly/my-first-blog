@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load staticfiles %}
 
 {% block content %}
     <div class="post">
@@ -11,7 +12,7 @@
         <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
-        <h1> сomments </h1>
+        <h1 style="display:inline">Comments  </h1><h2 id="count" style="display:inline">{{ post.commentss.count }}</h2>
         <div id="comments_content">
           {% for comment in post.commentss.all %}
               <p><b>{{ comment.author }}</b>:      {{ comment.text }}</p>
@@ -23,6 +24,27 @@
         {{ form.as_p }}
         <button type="submit" id = "search" class="save btn btn-default">Save</button>
     </form>
-
+    <img src="{% static 'img/m.png' %}" width="35px" height="35px" style="position:absolute; display:none" alt="Письма мастера ais" id="message">
     </div>
+    <script>
+    function move(){
+      var elem = document.getElementById('message');
+      var element = document.getElementById('search');
+      var pos_l = 800;
+      var pos_t = 300;
+      var id = setInterval(frame, 2);
+      console.log(pos_l)
+      function frame(){
+        if (pos_l == 180 && pos_t==0){
+          clearInterval(id)
+        }else if(pos_l!=180){
+          pos_l--
+          elem.style.left = pos_l + 'px';
+        }else if(pos_t!=0){
+            pos_t--;
+            elem.style.top = pos_t + 'px';
+          }
+        }
+      }
+    </script>
 {% endblock %}
