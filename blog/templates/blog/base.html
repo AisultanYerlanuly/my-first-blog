@@ -35,8 +35,9 @@
             var text =$('#id_text').val()
             var data_l="<p><b>"+String(author)+"</b>: "+String(text)+"</p>"
             var count = $('#count').html()
+            var captcha = grecaptcha.getResponse();
 
-            if ((author != '')&&(text != '')){
+            if ((author != '')&&(text != '')&&(captcha.length)){
               $.ajax({
                 type:'POST',
                 data:str,

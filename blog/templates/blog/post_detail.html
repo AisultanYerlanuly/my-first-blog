@@ -26,13 +26,13 @@
     </form>
     <img src="{% static 'img/m.png' %}" width="35px" height="35px" style="position:absolute; display:none" alt="Письма мастера ais" id="message">
     </div>
-    <script>
+    <!-- <script>
     function move(){
       var elem = document.getElementById('message');
       var element = document.getElementById('search');
       var pos_l = 800;
       var pos_t = 300;
-      var id = setInterval(frame, 2);
+      var id = setInterval(frame, 0);
       console.log(pos_l)
       function frame(){
         if (pos_l == 180 && pos_t==0){
@@ -46,5 +46,5 @@
           }
         }
       }
-    </script>
+    </script> -->
 {% endblock %}
